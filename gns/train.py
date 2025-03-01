@@ -77,6 +77,12 @@ def rollout(
   initial_positions = position[:, :INPUT_SEQUENCE_LENGTH]
   ground_truth_positions = position[:, INPUT_SEQUENCE_LENGTH:]
 
+  if ground_truth_positions.shape[1] < nsteps:
+      last_position = ground_truth_positions[:, -1:, :]  # Shape (nnodes, 1, dim)
+      num_missing_steps = nsteps - ground_truth_positions.shape[1]
+      repeated_positions = last_position.repeat(1, num_missing_steps, 1)
+      ground_truth_positions = torch.cat([ground_truth_positions, repeated_positions], dim=1)
+
   current_positions = initial_positions
   predictions = []
 
@@ -553,7 +559,8 @@ def _get_simulator(
       nparticle_types=NUM_PARTICLE_TYPES,
       particle_type_embedding_size=16,
       boundary_clamp_limit=metadata["boundary_augment"] if "boundary_augment" in metadata else 1.0,
-      device=device)
+      device=device,
+      edges=np.array(metadata["edges"]) if "edges" in metadata else None)
 
   return simulator
 

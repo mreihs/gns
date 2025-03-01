@@ -24,7 +24,8 @@ class LearnedSimulator(nn.Module):
           nparticle_types: int,
           particle_type_embedding_size: int,
           boundary_clamp_limit: float = 1.0,
-          device="cpu"
+          device="cpu",
+          edges:np.ndarray = None
   ):
     """Initializes the model.
 
@@ -72,6 +73,11 @@ class LearnedSimulator(nn.Module):
 
     self._device = device
 
+    if edges is not None:
+      self._edges = torch.tensor(edges, dtype=torch.int64).to(self._device)
+    else:
+      self._edges = None
+
   def forward(self):
     """Forward hook runs on class instantiation"""
     pass
@@ -98,8 +104,11 @@ class LearnedSimulator(nn.Module):
 
     # radius_graph accepts r < radius not r <= radius
     # A torch tensor list of source and target nodes with shape (2, nedges)
-    edge_index = radius_graph(
-        node_features, r=radius, batch=batch_ids, loop=add_self_edges, max_num_neighbors=128)
+    if self._edges is None:
+       edge_index = radius_graph(
+          node_features, r=radius, batch=batch_ids, loop=add_self_edges, max_num_neighbors=128)
+    else:
+       edge_index = self._edges
 
     # The flow direction when using in combination with message passing is
     # "source_to_target"
