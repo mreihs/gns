@@ -18,7 +18,7 @@
         "default_connectivity_radius": 0.1,
         "dim": 3,
         "dt": 0.01,
-        "nmessage_passing_steps": 10,
+        "nmessage_passing_steps": 1000,
         "vel_mean": [
             -0.03653793404369711,
             -0.025309711350736244,
@@ -6054,10 +6054,10 @@
             ]
         ],
         "sequence_length": 500,
-        "default_connectivity_radius": 0,
+        "default_connectivity_radius": 0.1,
         "dim": 3,
         "dt": 0.01,
-        "nmessage_passing_steps": 10,
+        "nmessage_passing_steps": 1000,
         "vel_mean": [
             -0.03653793404369711,
             -0.025309711350736244,
