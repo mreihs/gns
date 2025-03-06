@@ -1,8 +1,9 @@
 DATASET_NAME="leaf_0"
+DATASET_NUM="0"
 
-DATA_PATH="./sim/${DATASET_NAME}/datasets/"
-MODEL_PATH="./sim/${DATASET_NAME}/models/"
-ROLLOUT_PATH="./sim/${DATASET_NAME}/rollouts/"
+DATA_PATH="./sim/${DATASET_NAME}/${DATASET_NUM}/datasets/"
+MODEL_PATH="./sim/${DATASET_NAME}/${DATASET_NUM}/models/"
+ROLLOUT_PATH="./sim/${DATASET_NAME}/${DATASET_NUM}/rollouts/"
 
 
 python -m gns.train --data_path=${DATA_PATH} --model_path=${MODEL_PATH} --ntraining_steps=100 --mode='train'
