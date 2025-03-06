@@ -15,7 +15,7 @@
             ]
         ],
         "sequence_length": 100,
-        "default_connectivity_radius": 0,
+        "default_connectivity_radius": 0.1,
         "dim": 3,
         "dt": 0.01,
         "nmessage_passing_steps": 10,
@@ -6054,7 +6054,7 @@
             ]
         ],
         "sequence_length": 100,
-        "default_connectivity_radius": 0,
+        "default_connectivity_radius": 0.1,
         "dim": 3,
         "dt": 0.01,
         "nmessage_passing_steps": 10,
